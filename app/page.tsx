@@ -1,8 +1,12 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import React from 'react'
 
-export default function Home() {
+const Home = () => {
   return (
-   <main><Button>Hi</Button></main>
-  );
+    <div>
+      
+      <h1 className="text-4xl">Home</h1>
+      Home</div>
+  )
 }
+
+export default Home
