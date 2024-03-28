@@ -1,7 +1,8 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import Link from "next/link";
 import React from 'react';
+import Link from "next/link";
+import Image from "next/image";
+
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -40,4 +41,3 @@ export default function Home() {
     </>
   );
 };
-//className="m-auto w-auto"
