@@ -6,8 +6,9 @@ import * as z from 'zod';
 import { eventFormSchema } from "@/lib/validator";
 import { eventDefaultValues } from "@/constants";
 import { Input } from "@/components/ui/input";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Button } from "@/components/ui/button";
+import Dropdown from "./Dropdown";
 
 
 
@@ -43,12 +44,12 @@ const EventForm = ({ userId, type }: EventFormProps) => {
           <FormField control={form.control} name="categoryId" render={({ field }) => (
             <FormItem className="w-full">
               <FormControl>
-                <Input placeholder="Event Title" {...field} className="input-field" />
+                <Dropdown onChangeHandler={field.onChange} value={field.value} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )} />
-        
+
         </div>
         <Button type="submit">Submit</Button>
       </form>
