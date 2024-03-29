@@ -45,7 +45,6 @@ export function FileUploader({ imageUrl, onFieldChange, setFiles }: FileUploader
       className="flex flex-col flex-center h-72 overflow-hidden cursor-pointer rounded-xl bg-dark-3 bg-grey-50">
       
       <input {...getInputProps()} className="cursor-pointer" />
-      
       {imageUrl ? (
         <div className="flex flex-1 justify-center w-full h-full">
           <img src={imageUrl} alt="image" width={250} height={250} className="w-full object-contain object-center" />
