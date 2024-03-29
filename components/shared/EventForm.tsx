@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import Dropdown from "./Dropdown";
 import { FileUploader } from "./FileUploader";
 
@@ -140,7 +141,54 @@ const EventForm = ({ userId, type }: EventFormProps) => {
           )} />
         </div>
 
-        <Button type="submit">Submit</Button>
+        <div className="flex flex-col gap-5 md:flex-row">
+          {/* ===================== PRICE */}
+          <FormField control={form.control} name="price" render={({ field }) => (
+            <FormItem className="w-full">
+              <FormControl>
+                <div className="flex-center w-full h-[54px] overflow-hidden rounded-full bg-grey-50 px-4 py-2">
+                  <Image src="/assets/icons/dollar.svg" alt="dollar" width={24} height={24} className="filter-grey" />
+                  <Input type="number" placeholder="Price" {...field}
+                    className="p-regular-16 border-0 bg-grey-50 outline-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  />
+                  {/* ===================== CHECKBOX 'IS FREE' PRICE */}
+                  <FormField control={form.control} name="isFree" render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="flex items-center">
+                          <label htmlFor="isFree" className="whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Free Ticket</label>
+                          <Checkbox id="isFree" className="w-5 h-5 border-2 border-primary-500 mr-2" />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )} />
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )} />
+          {/* ===================== EVENT URL  */}
+          <FormField control={form.control} name="url" render={({ field }) => (
+            <FormItem className="w-full">
+              <FormControl>
+                <div className="flex-center w-full h-[54px] overflow-hidden rounded-full bg-grey-50 px-4 py-2">
+                  <Image src="/assets/icons/link.svg" alt="link" width={24} height={24} />
+                  <Input placeholder="URL" {...field} className="input-field" />
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )} />
+        </div>
+
+        <Button type="submit"
+          size="lg"
+          disabled={form.formState.isSubmitting}
+          className="button col-span-2 w-full"
+        >
+          {form.formState.isSubmitting ? ('Submitting...') : `${type} Event`}
+        </Button>
       </form>
     </Form>
   );
