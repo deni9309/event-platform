@@ -32,7 +32,7 @@ const EventForm = ({ userId, type }: EventFormProps) => {
   });
 
   const onSubmit = (values: z.infer<typeof eventFormSchema>) => {
-    //code...
+    console.log(values);
   };
 
   return (
@@ -157,7 +157,10 @@ const EventForm = ({ userId, type }: EventFormProps) => {
                       <FormControl>
                         <div className="flex items-center">
                           <label htmlFor="isFree" className="whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Free Ticket</label>
-                          <Checkbox id="isFree" className="w-5 h-5 border-2 border-primary-500 mr-2" />
+                          <Checkbox id="isFree"
+                            onCheckedChange={field.onChange}
+                            checked={field.value}
+                            className="w-5 h-5 border-2 border-primary-500 mr-2" />
                         </div>
                       </FormControl>
                       <FormMessage />

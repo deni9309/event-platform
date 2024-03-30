@@ -1,10 +1,11 @@
 'use client';
-import { startTransition, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 
 import { ICategory } from "@/lib/database/models/category.model";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
+import { createCategory, getAllCategories } from "@/lib/actions/category.actions";
 
 type DropdownProps = {
   value?: string;
@@ -16,8 +17,23 @@ const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
   const [newCategory, setNewCategory] = useState('');
 
   const handleAddCategory = () => {
-    //TODO: IMPLEMENT SOME LOGIC HERE...
+    createCategory({
+      categoryName: newCategory.trim()
+    })
+      .then((category) => {
+        setCategories(prevState => [...prevState, category]);
+      });
   };
+
+  useEffect(() => {
+    const getCategories = async () => {
+      const allCategories = await getAllCategories();
+
+      allCategories && setCategories(allCategories as ICategory[]);
+    };
+
+    getCategories();
+  }, []);
 
   return (
     <Select onValueChange={onChangeHandler} defaultValue={value}>
@@ -39,17 +55,21 @@ const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
             <AlertDialogHeader>
               <AlertDialogTitle>New Category</AlertDialogTitle>
               <AlertDialogDescription>
+
                 <Input type="text" placeholder="Category Name" className="input-field mt-3"
                   onChange={(e) => setNewCategory(e.target.value)}
                 />
+
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
+
               <AlertDialogAction
                 onClick={() => startTransition(handleAddCategory)}>
                 Add
               </AlertDialogAction>
+
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
