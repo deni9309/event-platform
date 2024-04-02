@@ -136,14 +136,14 @@ export const getEventsByUser = async ({ userId, limit = 6, page }: GetEventsByUs
       .sort({ createdAt: 'desc' })
       .skip(skipAmount)
       .limit(limit);
-    
+
     const events = await populateEvent(eventsQuery);
     const eventsCount = await Event.countDocuments(conditions);
 
     return {
       data: JSON.parse(JSON.stringify(events)),
       totalPages: Math.ceil(eventsCount / limit),
-    }
+    };
   } catch (error) {
     handleError(error);
   }
@@ -153,10 +153,7 @@ export const getEventsByUser = async ({ userId, limit = 6, page }: GetEventsByUs
  * Get related events (put in the same category)
  */
 export const getRelatedEventsByCategory = async ({
-  categoryId,
-  eventId,
-  limit = 3,
-  page = 1
+  categoryId, eventId, limit = 3, page = 1
 }: GetRelatedEventsByCategoryParams) => {
   try {
     await connectToDatabase();

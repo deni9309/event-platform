@@ -19,22 +19,29 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Dropdown from "./Dropdown";
 import { FileUploader } from "./FileUploader";
 import { useUploadThing } from "@/lib/uploadthing";
-import { createEvent } from "@/lib/actions/event.actions";
-import { IEvent } from "@/lib/database/models/event.model";
+import { createEvent, updateEvent } from "@/lib/actions/event.actions";
+import { Event } from '@/types';
 
 type EventFormProps = {
   userId: string;
   type: "Create" | "Update";
-  event?: IEvent,
+  event?: Event,
   eventId?: string,
 };
 
-const EventForm = ({ userId, type }: EventFormProps) => {
-  const [files, setFiles] = useState<File[]>([]);
-  const initialValues = eventDefaultValues;
+const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
   const router = useRouter();
-
+  const [files, setFiles] = useState<File[]>([]);
   const { startUpload } = useUploadThing('imageUploader');
+
+  const initialValues = event && type === 'Update'
+    ? {
+      ...event,
+      startDateTime: new Date(event.startDateTime),
+      endDateTime: new Date(event.endDateTime),
+      categoryId: event.category._id
+    }
+    : eventDefaultValues;
 
   const form = useForm<z.infer<typeof eventFormSchema>>({
     resolver: zodResolver(eventFormSchema),
@@ -61,13 +68,26 @@ const EventForm = ({ userId, type }: EventFormProps) => {
 
         if (newEvent) {
           form.reset();
-          router.push(`/`);
-
-          // router.push(`/events/${newEvent._id}`);
+          router.push(`/events/${newEvent._id}`);
         }
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) { console.log(error); }
+    }
+
+    if (type === 'Update') {
+      if (!eventId) { router.back(); return; }
+
+      try {
+        const updatedEvent = await updateEvent({
+          userId,
+          event: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
+          path: `/events/${eventId}`
+        });
+
+        if (updatedEvent) {
+          form.reset();
+          router.push(`/events/${eventId}`);
+        }
+      } catch (error) { console.log(error); }
     }
   };
 
