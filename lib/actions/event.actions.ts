@@ -16,6 +16,11 @@ import User from "@/lib/database/models/user.model";
 import Event from "@/lib/database/models/event.model";
 import Category from "@/lib/database/models/category.model";
 
+type EventQueryType = {
+  data: EventType[];
+  totalPages: number;
+};
+
 export const createEvent = async ({ userId, event, path }: CreateEventParams) => {
   try {
     await connectToDatabase();
@@ -116,7 +121,7 @@ export const getAllEvents = async ({ query, limit = 6, page, category }: GetAllE
     return {
       data: JSON.parse(JSON.stringify(events)) as EventType[],
       totalPages: Math.ceil(eventsCount / limit),
-    };
+    } as EventQueryType;
   } catch (error) {
     handleError(error);
   }
@@ -143,7 +148,7 @@ export const getEventsByUser = async ({ userId, limit = 6, page }: GetEventsByUs
     return {
       data: JSON.parse(JSON.stringify(events)),
       totalPages: Math.ceil(eventsCount / limit),
-    };
+    } as EventQueryType;
   } catch (error) {
     handleError(error);
   }
@@ -172,7 +177,7 @@ export const getRelatedEventsByCategory = async ({
     return {
       data: JSON.parse(JSON.stringify(events)),
       totalPages: Math.ceil(eventsCount / limit)
-    };
+    } as EventQueryType;
   } catch (error) {
     handleError(error);
   }

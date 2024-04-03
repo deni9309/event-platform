@@ -78,8 +78,7 @@ body {
 }
 
 .filter-grey {
-  filter: brightness(0) saturate(100%) invert(47%) sepia(0%) saturate(217%)
-    hue-rotate(32deg) brightness(98%) contrast(92%);
+  filter: brightness(0) saturate(100%) invert(47%) sepia(0%) saturate(217%) hue-rotate(32deg) brightness(98%) contrast(92%);
 }
 
 /* ========================================== TAILWIND STYLES */
@@ -99,7 +98,7 @@ body {
   /* TYPOGRAPHY */
   /* 64 */
   .h1-bold {
-    @apply font-bold text-[40px] leading-[52px] lg:text-[46px] lg:leading-[60px]  xl:text-[50px] xl:leading-[76px];
+    @apply font-bold text-[40px] leading-[52px] lg:text-[46px] lg:leading-[60px] xl:text-[50px] xl:leading-[76px];
   }
 
   /* 40 */
@@ -108,26 +107,26 @@ body {
   }
 
   .h2-medium {
-    @apply font-medium text-[32px] leading-[40px] lg:text-[36px] lg:leading-[44px] xl:text-[40px] xl:leading-[48px];
+    @apply font-medium text-[32px] leading-[48px] lg:text-[34px] lg:leading-[48px] xl:text-[38px] xl:leading-[50px];
   }
 
   /* 36 */
   .h3-bold {
-    @apply font-bold text-[28px] leading-[36px] md:text-[36px] md:leading-[44px];
+    @apply font-bold text-[26px] leading-[34px] md:text-[34px] md:leading-[42px];
   }
 
   .h3-medium {
-    @apply font-medium text-[28px] leading-[36px] md:text-[36px] md:leading-[44px];
+    @apply font-medium text-[26px] leading-[34px] md:text-[34px] md:leading-[42px];
   }
 
   /* 32 */
   .h4-medium {
-    @apply font-medium text-[32px] leading-[40px];
+    @apply font-medium text-[28px] leading-[34px];
   }
 
   /* 28 */
   .h5-bold {
-    @apply font-bold text-[28px] leading-[36px];
+    @apply font-bold text-[26px] leading-[34px];
   }
 
   /* 24 */
@@ -218,11 +217,11 @@ body {
   }
 
   .button {
-    @apply rounded-full h-[54px] p-regular-16;
+    @apply rounded-full h-[48px] p-regular-16;
   }
 
   .select-item {
-    @apply py-3 cursor-pointer  focus:bg-primary-50;
+    @apply py-3 cursor-pointer focus:bg-primary-50;
   }
 
   .toggle-switch {

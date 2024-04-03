@@ -22,7 +22,7 @@ const EventDetails = async ({ params: { id }, searchParams }: SearchParamProps) 
           <Image src={event.imageUrl} alt="event image" width={1000} height={1000} className="h-full min-h-[300px] object-cover object-center" />
           <div className="flex flex-col w-full gap-8 p-5 md:p-10">
             <div className="flex flex-col gap-6">
-              <h2 className="h2-bold">{event.title}</h2>
+              <h3 className="h3-medium">{event.title}</h3>
 
               {/* EVENT META */}
               <div className="flex flex-row md:flex-col flex-wrap items-center md:items-start md:gap-3 gap-2">
@@ -58,14 +58,14 @@ const EventDetails = async ({ params: { id }, searchParams }: SearchParamProps) 
               {/* LOCATION */}
               <div className="flex items-center gap-3 p-regular-20">
                 <Image src="/assets/icons/location.svg" alt="location" width={32} height={32} />
-                <p className="p-medium-16 lg:p-regular-20">{event.location}</p>
+                <p className="p-medium-16">{event.location}</p>
               </div>
             </div>
             {/* DESCRIPTION */}
             <div className="flex flex-col gap-2">
               <p className="p-bold-20 text-grey-600">Topic and description:</p>
-              <p className="p-medium-16 lg:p-regular-18">{event.description}</p>
-              <p className="text-primary-500 underline truncate p-medium-16 lg:p-regular-18">{event.url}</p>
+              <p className="p-regular-16 lg:p-regular-18 !leading-7">{event.description}</p>
+              <p className="text-primary-500 underline truncate p-regular-16 lg:p-regular-18">{event.url}</p>
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@ const EventDetails = async ({ params: { id }, searchParams }: SearchParamProps) 
 
       {/* RELATED EVENTS (WITH THE SAME CATEGORY) */}
       <section className="wrapper flex flex-col gap-8 md:gap-12 my-8">
-        <h2 className="h2-bold">Related Events</h2>
+        <h5 className="h5-bold">Related Events</h5>
 
         <Collection
           data={relatedEvents?.data!}
@@ -82,7 +82,7 @@ const EventDetails = async ({ params: { id }, searchParams }: SearchParamProps) 
           collectionType="All_Events"
           limit={6}
           page={1}
-          totalPages={2}
+          totalPages={relatedEvents?.totalPages}
         />
       </section>
     </>
