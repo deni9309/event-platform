@@ -6,7 +6,7 @@ import { ObjectId } from "mongodb";
 import { CheckoutOrderParams, CreateOrderParams, GetOrdersByEventParams, GetOrdersByUserParams } from "@/types";
 import { connectToDatabase } from "../database";
 import { handleError } from "../utils";
-import Order from "../database/models/order.model";
+import Order, { TOrder } from "../database/models/order.model";
 import Event from "../database/models/event.model";
 import User from "../database/models/user.model";
 
@@ -138,7 +138,7 @@ export async function getOrdersByUser({ userId, limit = 3, page }: GetOrdersByUs
     const ordersCount = await Order.distinct('event._id').countDocuments(conditions);
 
     return {
-      data: JSON.parse(JSON.stringify(orders)),
+      data: JSON.parse(JSON.stringify(orders)) as TOrder[],
       totalPages: Math.ceil(ordersCount / limit)
     };
   } catch (error) {

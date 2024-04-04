@@ -1,3 +1,4 @@
+import { Event } from "@/types";
 import { Document, model, models, Schema } from "mongoose";
 
 export interface IOrder extends Document {
@@ -6,6 +7,15 @@ export interface IOrder extends Document {
   totalAmount: string;
   event: { _id: string, title: string, };
   buyer: { _id: string, firstName: string, lastName: string, };
+}
+
+export type TOrder = {
+  _id: string;
+  createdAt: Date;
+  stripeId: string;
+  totalAmount: string;
+  event: Event;
+  buyer: string;
 }
 
 export type TOrderItem = {
