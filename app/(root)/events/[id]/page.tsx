@@ -5,6 +5,7 @@ import { SearchParamProps, Event } from "@/types";
 import { getEventById, getRelatedEventsByCategory } from "@/lib/actions/event.actions";
 import { formatDateTime } from "@/lib/utils";
 import Collection from "@/components/shared/Collection";
+import CheckoutButton from "@/components/shared/CheckoutButton";
 
 const EventDetails = async ({ params: { id }, searchParams }: SearchParamProps) => {
   const event: Event = await getEventById(id);
@@ -38,6 +39,7 @@ const EventDetails = async ({ params: { id }, searchParams }: SearchParamProps) 
             </div>
 
             {/* CHECKOUT BUTTON */}
+            <CheckoutButton event={event} />
 
             <div className="flex flex-col gap-5">
               {/* EVENT DATE(S) */}
