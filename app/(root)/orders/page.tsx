@@ -10,7 +10,6 @@ const OrdersPage = async ({ searchParams }: SearchParamProps) => {
   const searchText = (searchParams?.query as string) || '';
 
   const orders = await getOrdersByEvent({ eventId, searchString: searchText }) || [];
-console.log(orders[0]);
 
   return (
     <>
@@ -25,11 +24,11 @@ console.log(orders[0]);
         <table className="w-full border-collapse border-t">
           <thead>
             <tr className="text-grey-500 border-b p-medium-14">
-              <th className="min-w-[250px] py-3 text-left">Order ID</th>
-              <th className="min-w-[200px] flex-1 py-3 pr-4 text-left">Event Title</th>
-              <th className="min-w-[150px] py-3 text-left">Buyer</th>
-              <th className="min-w-[100px] py-3 text-left">Created</th>
-              <th className="min-w-[100px] py-3 text-right">Amount</th>
+              <th className="min-w-[90px] sm:min-w-[200px] py-3 text-left">Order ID</th>
+              <th className="min-w-[220px] flex-1 py-3 px-1 text-left">Event Title</th>
+              <th className="min-w-[100px] py-3 px-1 text-left">Buyer</th>
+              <th className="min-w-[90px] py-3 px-1 text-left">Created</th>
+              <th className="min-w-[60px] py-3 px-1 text-right">Amount</th>
             </tr>
           </thead>
           <tbody>
@@ -40,12 +39,12 @@ console.log(orders[0]);
             ) : (
               <>
                 {orders && orders.map(row => (
-                  <tr key={row._id} style={{ boxSizing: 'border-box' }} className="p-regular-14 lg:p-regular-16 border-b">
-                    <td className="min-w-[250px] py-4 text-primary-500">{row._id}</td>
-                    <td className="min-w-[200px] flex-1 py-4 pr-4">{row.eventTitle}</td>
-                    <td className="min-w-[150px] py-4">{row.buyer}</td>
-                    <td className="min-w-[100px] py-4">{formatDateTime(row.createdAt).dateTime}</td>
-                    <td className="min-w-[100px] py-4 text-right">{formatPrice(row.totalAmount)}</td>
+                  <tr key={row._id} style={{ boxSizing: 'border-box' }} className="text-sm sm:p-regular-14 xl:p-regular-16 border-b flex-wrap align-top">
+                    <td className="min-w-[90px] sm:min-w-[200px] py-4 pl-1 pr-3 text-primary-500 break-all md:break-keep">{row._id}</td>
+                    <td className="min-w-[220px] flex-1 py-4 px-1">{row.eventTitle}</td>
+                    <td className="min-w-[100px] py-4 px-1">{row.buyer}</td>
+                    <td className="min-w-[90px] py-4 px-1">{formatDateTime(row.createdAt).dateTime}</td>
+                    <td className="min-w-[60px] py-4 px-1 text-right">{formatPrice(row.totalAmount)}</td>
                   </tr>
                 ))}
               </>

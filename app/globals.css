@@ -203,6 +203,11 @@ body {
     @apply text-[12px] font-medium leading-[20px];
   }
 
+  /* Disable focus ring */
+  .disable-focus-ring {
+    @apply outline-offset-0 border-0 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0 !important;
+  }
+
   /* SHADCN OVERRIDES */
   .select-field {
     @apply w-full bg-grey-50 h-[54px] placeholder:text-grey-500 rounded-full p-regular-16 px-5 py-3 border-none focus-visible:ring-transparent focus:ring-transparent !important;

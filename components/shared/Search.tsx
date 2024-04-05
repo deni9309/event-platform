@@ -1,8 +1,49 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 
-const Search = ({ placeholder }: { placeholder: string; }) => {
+import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
+import { Input } from "../ui/input";
+
+const Search = ({ placeholder = 'Search title...' }: { placeholder?: string; }) => {
+  const [query, setQuery] = useState('');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      let newUrl = '';
+
+      if (query) {
+        newUrl = formUrlQuery({
+          params: searchParams.toString(),
+          key: 'query',
+          value: query
+        });
+      } else {
+        newUrl = removeKeysFromQuery({
+          params: searchParams.toString(),
+          keysToRemove: ['query']
+        });
+      }
+
+      router.push(newUrl, { scroll: false });
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [query, searchParams, router]);
+
   return (
-    <div>Search</div>
+    <div className="flex-center w-full min-h-[54px] overflow-clip rounded-full bg-grey-50 px-4 py-2">
+      <Image src="/assets/icons/search.svg" alt="search" width={24} height={24} />
+      <Input
+        type="text"
+        placeholder={placeholder}
+        onChange={(e) => setQuery(e.target.value)}
+        className="p-regular-14 text-primary placeholder:text-grey-500 bg-grey-50 disable-focus-ring"
+      />
+    </div>
   );
 };
 
