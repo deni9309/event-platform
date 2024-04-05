@@ -42,6 +42,15 @@ export const formatDateTime = (input: Date) => {
   };
 };
 
+export const formatPrice = (priceString: string) => {
+  const amount = parseFloat(priceString);
+
+  const formatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
+    .format(amount);
+
+  return formatted;
+};
+
 export const convertFileToUrl = (file: File) => URL.createObjectURL(file);
 
 export function removeKeysFromQuery({ params, keysToRemove }: RemoveUrlQueryParams) {

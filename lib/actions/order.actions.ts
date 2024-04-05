@@ -6,7 +6,7 @@ import { ObjectId } from "mongodb";
 import { CheckoutOrderParams, CreateOrderParams, GetOrdersByEventParams, GetOrdersByUserParams } from "@/types";
 import { connectToDatabase } from "../database";
 import { handleError } from "../utils";
-import Order, { TOrder } from "../database/models/order.model";
+import Order, { TOrder, TOrderItem } from "../database/models/order.model";
 import Event from "../database/models/event.model";
 import User from "../database/models/user.model";
 
@@ -66,7 +66,7 @@ export async function getOrdersByEvent({ searchString, eventId }: GetOrdersByEve
     if (!eventId) { throw new Error('Event ID is required!'); }
     const eventObjectId = new ObjectId(eventId);
 
-    const orders = await Order.aggregate([
+    const orders: TOrderItem[] = await Order.aggregate([
       {
         $lookup: {  // works like left outer join between 'orders' and 'users' 
           from: 'users',
@@ -93,6 +93,7 @@ export async function getOrdersByEvent({ searchString, eventId }: GetOrdersByEve
         $project: {
           _id: 1,
           totalAmount: 1,
+          createdAt: 1,
           eventTitle: '$event.title',
           eventId: '$event._id',
           buyer: {
@@ -107,7 +108,7 @@ export async function getOrdersByEvent({ searchString, eventId }: GetOrdersByEve
       },
     ]);
 
-    return JSON.parse(JSON.stringify(orders));
+    return JSON.parse(JSON.stringify(orders)) as TOrderItem[];
   } catch (error) {
     handleError(error);
   }
@@ -142,6 +143,6 @@ export async function getOrdersByUser({ userId, limit = 3, page }: GetOrdersByUs
       totalPages: Math.ceil(ordersCount / limit)
     };
   } catch (error) {
-
+    handleError(error);
   }
 }
