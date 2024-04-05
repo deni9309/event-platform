@@ -7,6 +7,7 @@ import { getAllEvents } from "@/lib/actions/event.actions";
 import { Button } from "@/components/ui/button";
 import Search from "@/components/shared/Search";
 import Collection from "@/components/shared/Collection";
+import CategoryFilter from "@/components/shared/CategoryFilter";
 
 export default async function Home({ searchParams }: SearchParamProps) {
   const page = Number(searchParams?.page) || 1;
@@ -37,7 +38,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
         <h2 className="h2-bold">Trust by <br /> Thousands of Events</h2>
         <div className="flex flex-col md:flex-row gap-5 w-full">
           <Search />
-          Category Filter
+          <CategoryFilter />
         </div>
 
         <Collection

@@ -104,6 +104,11 @@ export type CreateCategoryParams = {
   categoryName: string;
 };
 
+export type TCategory = {
+  _id: string;
+  name: string;
+}
+
 // ================== ORDER Params
 export type CheckoutOrderParams = {
   eventTitle: string;
