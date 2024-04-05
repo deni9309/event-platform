@@ -2,12 +2,18 @@ import React from 'react';
 import Link from "next/link";
 import Image from "next/image";
 
-import { Button } from "@/components/ui/button";
-import Collection from "@/components/shared/Collection";
+import { SearchParamProps } from "@/types";
 import { getAllEvents } from "@/lib/actions/event.actions";
+import { Button } from "@/components/ui/button";
+import Search from "@/components/shared/Search";
+import Collection from "@/components/shared/Collection";
 
-export default async function Home() {
-  const events = await getAllEvents({ query: '', category: '', page: 1, limit: 6 });
+export default async function Home({ searchParams }: SearchParamProps) {
+  const page = Number(searchParams?.page) || 1;
+  const searchText = (searchParams?.query as string) || '';
+  const category = (searchParams?.category as string) || '';
+
+  const events = await getAllEvents({ query: searchText, category, page, limit: 6 });
 
   return (
     <>
@@ -30,7 +36,7 @@ export default async function Home() {
         className="wrapper flex flex-col gap-8 md:gap-12 my-8">
         <h2 className="h2-bold">Trust by <br /> Thousands of Events</h2>
         <div className="flex flex-col md:flex-row gap-5 w-full">
-          Search
+          <Search />
           Category Filter
         </div>
 
