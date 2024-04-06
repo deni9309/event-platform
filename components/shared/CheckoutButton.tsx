@@ -19,17 +19,17 @@ const CheckoutButton = ({ event }: { event: Event; }) => {
       {hasEventFinished ? (
         <p className="p-2 text-red-400">Sorry, tickets are no longer available.</p>
       ) : (
-          <>
+        <>
           <SignedOut>
             <Button asChild size="lg" className="button rounded-full">
               <Link href="/sign-in">Get Tickets</Link>
             </Button>
           </SignedOut>
-          
+
           <SignedIn>
-              <Checkout event={event} userId={userId} />
+            <Checkout event={event} userId={userId} />
           </SignedIn>
-          </>
+        </>
       )}
     </div>
   );

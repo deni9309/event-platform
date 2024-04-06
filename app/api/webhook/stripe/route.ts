@@ -1,6 +1,7 @@
 import stripe from 'stripe';
-import {NextResponse } from 'next/server';
-import {createOrder } from '@/lib/actions/order.actions';
+import { NextResponse } from 'next/server';
+
+import { createOrder } from '@/lib/actions/order.actions';
 
 export async function POST(request: Request) {
   const body = await request.text();
@@ -20,7 +21,7 @@ export async function POST(request: Request) {
   // Create
   if (eventType === 'checkout.session.completed') {
     const { id, amount_total, metadata } = event.data.object;
-    
+
     const order = {
       stripeId: id,
       eventId: metadata?.eventId || '',

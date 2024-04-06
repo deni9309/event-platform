@@ -20,7 +20,7 @@ const Checkout = ({ event, userId }: { event: Event; userId: string; }) => {
       console.log('Order canceled -- continue to shop around and checkout when you\'re ready.');
     }
   }, []);
-  
+
   const onCheckout = async () => {
     const order = {
       eventTitle: event.title,
