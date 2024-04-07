@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Event as EventType } from "@/types";
 import Card from "./Card";
+import Pagination from "./Pagination";
 
 type CollectionProps = {
   data: EventType[],
@@ -35,6 +36,9 @@ const Collection = ({
               );
             })}
           </ul>
+          {totalPages > 1 && (
+            <Pagination page={page} totalPages={totalPages} urlParamName={urlParamName} />
+          )}
         </div>
       ) : (
         <div className="wrapper flex-col flex-center gap-3 w-full min-h-[200px] rounded-[14px] bg-grey-50 py-28 text-center">
