@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Evently - Event Platform application
 
-## Getting Started
+## Introduction
 
-First, run the development server:
+Evently is an event organization web application that provides user authentication, event and category management, searching, filtering, checkout and payment functionalities.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Functionality
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Authentication (CRUD) with Clerk
+#### User management through Clerk, ensuring secure and efficient authentication.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Events (CRUD)
+#### Functionality for creating, reading, updating, and deleting events.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. **Create Events**: Users can generate new events, providing essential details such as title, date, location, and any additional information.
 
-## Learn More
+2. **Read Events**: Access to a detailed view of all events, allowing users to explore event specifics, including descriptions, schedules, and related information.
 
-To learn more about Next.js, take a look at the following resources:
+3. **Update Events**: Users can modify event details dynamically, ensuring that event information remains accurate and up-to-date.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. **Delete Events**: Removing events from the system.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+5. **Related Events**: Functionality of smartly connecting events that are related and displaying on the event details page.
 
-## Deploy on Vercel
+6. **Organized Events**: Organization of events, ensuring a structured and user-friendly display for the audience, i.e., showing events created by the user on the user profile.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+7. **Search & Filter**: Users can search and filter events by event title and/or by category.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+8. **New Category**: Dynamic categorization allows for the seamless addition of new event categories.
+
+9. **Checkout and Pay with Stripe**: Payment transactions using Stripe.
+
+10. **Event Orders**: Order management system, providing a clear overview of all event-related transactions.
+
+11. **Search Orders**: Quick and efficient search functionality for orders, facilitating easy tracking and management.
+
+## Tech Stack
+
+- Node.js
+- Next.js
+- TypeScript
+- TailwindCSS
+- Stripe
+- Zod
+- React Hook Form
+- Shadcn
+- uploadthing
+
+## Deployment
+
+**Evently is deployed on Vercel:** [event-platform-xi-flax.vercel.app](event-platform-xi-flax.vercel.app)
+
+### Links and Credits
+
+Special thanks to [Javascript Mastery video](https://youtu.be/zgGhzuBZOQg?si=Sx_MFoPcXF_Egdqm) that I used.
